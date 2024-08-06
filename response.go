@@ -116,9 +116,9 @@ type PaymentChannelDetail struct {
 	Description          string `json:"Description"`
 	PaymentIntrucionsDoc string `json:"PaymentIntrucionsDoc"`
 	TransactionFee       struct {
-		ActualFee     int    `json:"ActualFee"`
-		ActualFeeType string `json:"ActualFeeType"`
-		AdditionalFee int    `json:"AdditionalFee"`
+		ActualFee     float64 `json:"ActualFee"`
+		ActualFeeType string  `json:"ActualFeeType"`
+		AdditionalFee float64 `json:"AdditionalFee"`
 	} `json:"TransactionFee"`
 }
 
@@ -127,8 +127,8 @@ type PaymentMethodDetail struct {
 	Description          string  `json:"Description"`
 	PaymentIntrucionsDoc *string `json:"PaymentIntrucionsDoc"`
 	TransactionFee       struct {
-		ActualFee     int    `json:"ActualFee"`
-		ActualFeeType string `json:"ActualFeeType"`
-		AdditionalFee int    `json:"AdditionalFee"`
+		ActualFee     float64 `json:"ActualFee"`
+		ActualFeeType string  `json:"ActualFeeType"`
+		AdditionalFee float64 `json:"AdditionalFee"`
 	} `json:"TransactionFee"`
 }

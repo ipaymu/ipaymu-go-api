@@ -14,6 +14,7 @@ func (c Client) ListPaymentMethod() (res ResponseListPayment, err error) {
 	if err != nil {
 		return
 	}
+	fmt.Println(string(api))
 
 	err = json.Unmarshal(api, &res)
 	if err != nil {
