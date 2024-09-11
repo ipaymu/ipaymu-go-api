@@ -1,6 +1,7 @@
 package ipaymu_go_api
 
 import (
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -19,6 +20,7 @@ type ClientApi interface {
 	DirectPaymentCOD(request RequestDirectCOD) (res Response, err error)
 	RedirectPayment(request RequestRedirect) (res Response, err error)
 	GetBalance() (res ResponseBalance, err error)
+	AssignCredential(apiKey, virtualAccount string, env EnvironmentType)
 }
 
 type Client struct {
@@ -33,10 +35,16 @@ func NewClient() *Client {
 	}
 }
 
+func (c *Client) AssignCredential(apiKey, virtualAccount string, env EnvironmentType) {
+	c.ApiKey = apiKey
+	c.VirtualAccount = virtualAccount
+	c.EnvApi = env
+}
+
 var defHTTPTimeout = 30 * time.Second
 
-func (c Client) CallApi(url *url.URL, signature string, body []byte) ([]byte, error) {
-	reqBody := ioutil.NopCloser(strings.NewReader(string(body)))
+func (c *Client) CallApi(url *url.URL, signature string, body []byte) ([]byte, error) {
+	reqBody := io.NopCloser(strings.NewReader(string(body)))
 
 	req := &http.Request{
 		Method: http.MethodPost,

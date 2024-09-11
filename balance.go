@@ -6,10 +6,10 @@ import (
 	"net/url"
 )
 
-func (c Client) GetBalance() (res ResponseBalance, err error) {
+func (c *Client) GetBalance() (res ResponseBalance, err error) {
 	url, _ := url.Parse(fmt.Sprintf("%s/api/v2/balance", c.EnvApi))
 	jsonBody, _ := json.Marshal(map[string]string{"account": c.VirtualAccount})
-	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", c))
+	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", *c))
 	api, err := c.CallApi(url, signature, jsonBody)
 	if err != nil {
 		return res, err

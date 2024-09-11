@@ -6,11 +6,11 @@ import (
 	"net/url"
 )
 
-func (c Client) CheckTransaction(transactionID int) (res ResponseCheck, err error) {
-	url, _ := url.Parse(fmt.Sprintf("%s/api/v2/transaction", c.EnvApi))
+func (c *Client) CheckTransaction(transactionID int) (res ResponseCheck, err error) {
+	uri, _ := url.Parse(fmt.Sprintf("%s/api/v2/transaction", c.EnvApi))
 	jsonBody, _ := json.Marshal(map[string]int{"transactionId": transactionID})
-	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", c))
-	api, err := c.CallApi(url, signature, jsonBody)
+	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", *c))
+	api, err := c.CallApi(uri, signature, jsonBody)
 	if err != nil {
 		return res, err
 	}
@@ -27,11 +27,11 @@ func (c Client) CheckTransaction(transactionID int) (res ResponseCheck, err erro
 	return
 }
 
-func (c Client) HistoryTransaction(request RequestTransactionHistory) (res ResponseTransaction, err error) {
-	url, _ := url.Parse(fmt.Sprintf("%s/api/v2/history", c.EnvApi))
+func (c *Client) HistoryTransaction(request RequestTransactionHistory) (res ResponseTransaction, err error) {
+	uri, _ := url.Parse(fmt.Sprintf("%s/api/v2/history", c.EnvApi))
 	jsonBody, _ := json.Marshal(request)
-	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", c))
-	api, err := c.CallApi(url, signature, jsonBody)
+	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", *c))
+	api, err := c.CallApi(uri, signature, jsonBody)
 	if err != nil {
 		return
 	}

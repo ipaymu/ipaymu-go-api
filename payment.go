@@ -6,10 +6,10 @@ import (
 	"net/url"
 )
 
-func (c Client) ListPaymentMethod() (res ResponseListPayment, err error) {
+func (c *Client) ListPaymentMethod() (res ResponseListPayment, err error) {
 	url, _ := url.Parse(fmt.Sprintf("%s/api/v2/payment-method-list", c.EnvApi))
 	jsonBody, _ := json.Marshal(map[string]bool{"request": true})
-	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", c))
+	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", *c))
 	api, err := c.CallApi(url, signature, jsonBody)
 	if err != nil {
 		return
@@ -27,10 +27,10 @@ func (c Client) ListPaymentMethod() (res ResponseListPayment, err error) {
 	return
 }
 
-func (c Client) DirectPaymentVA(request RequestDirectVA) (res Response, err error) {
+func (c *Client) DirectPaymentVA(request RequestDirectVA) (res Response, err error) {
 	url, _ := url.Parse(fmt.Sprintf("%s/api/v2/payment/direct", c.EnvApi))
 	jsonBody, _ := json.Marshal(request)
-	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", c))
+	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", *c))
 	api, err := c.CallApi(url, signature, jsonBody)
 	if err != nil {
 		return Response{}, err
@@ -48,10 +48,10 @@ func (c Client) DirectPaymentVA(request RequestDirectVA) (res Response, err erro
 	return
 }
 
-func (c Client) DirectPaymentConStore(request RequestDirectConStore) (res Response, err error) {
+func (c *Client) DirectPaymentConStore(request RequestDirectConStore) (res Response, err error) {
 	url, _ := url.Parse(fmt.Sprintf("%s/api/v2/payment/direct", c.EnvApi))
 	jsonBody, _ := json.Marshal(request)
-	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", c))
+	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", *c))
 	api, err := c.CallApi(url, signature, jsonBody)
 	if err != nil {
 		return Response{}, err
@@ -69,10 +69,10 @@ func (c Client) DirectPaymentConStore(request RequestDirectConStore) (res Respon
 	return
 }
 
-func (c Client) DirectPaymentCOD(request RequestDirectCOD) (res Response, err error) {
+func (c *Client) DirectPaymentCOD(request RequestDirectCOD) (res Response, err error) {
 	url, _ := url.Parse(fmt.Sprintf("%s/api/v2/payment/direct", c.EnvApi))
 	jsonBody, _ := json.Marshal(request)
-	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", c))
+	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", *c))
 	api, err := c.CallApi(url, signature, jsonBody)
 	if err != nil {
 		return Response{}, err
@@ -90,10 +90,10 @@ func (c Client) DirectPaymentCOD(request RequestDirectCOD) (res Response, err er
 	return
 }
 
-func (c Client) RedirectPayment(request RequestRedirect) (res Response, err error) {
+func (c *Client) RedirectPayment(request RequestRedirect) (res Response, err error) {
 	url, _ := url.Parse(fmt.Sprintf("%s/api/v2/payment/", c.EnvApi))
 	jsonBody, _ := json.Marshal(request)
-	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", c))
+	signature := fmt.Sprintf("%s", GenerateSignature(string(jsonBody), "POST", *c))
 	api, err := c.CallApi(url, signature, jsonBody)
 	if err != nil {
 		return Response{}, err
