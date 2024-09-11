@@ -9,6 +9,18 @@ import (
 	"time"
 )
 
+type ClientApi interface {
+	CallApi(url *url.URL, signature string, body []byte) ([]byte, error)
+	CheckTransaction(transactionID int) (res ResponseCheck, err error)
+	HistoryTransaction(request RequestTransactionHistory) (res ResponseTransaction, err error)
+	ListPaymentMethod() (res ResponseListPayment, err error)
+	DirectPaymentVA(request RequestDirectVA) (res Response, err error)
+	DirectPaymentConStore(request RequestDirectConStore) (res Response, err error)
+	DirectPaymentCOD(request RequestDirectCOD) (res Response, err error)
+	RedirectPayment(request RequestRedirect) (res Response, err error)
+	GetBalance() (res ResponseBalance, err error)
+}
+
 type Client struct {
 	ApiKey         string
 	VirtualAccount string
