@@ -1,3 +1,3 @@
-module gitlab.ipaymu.com/plugin/ipaymu-go-api
+module github.com/ipaymu/ipaymu-go-api
 
 go 1.18
