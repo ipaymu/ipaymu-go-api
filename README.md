@@ -14,7 +14,7 @@ For the details of this library, see the [GoDoc](soon).
 Install ipaymu-go with:
 
 ```sh
-go get -u soon
+go get github.com/ipaymu/ipaymu-go
 ```
 
 Then, import it using:
