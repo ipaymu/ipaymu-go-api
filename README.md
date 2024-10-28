@@ -14,14 +14,14 @@ For the details of this library, see the [GoDoc](soon).
 Install ipaymu-go with:
 
 ```sh
-go get github.com/ipaymu/ipaymu-go
+go get github.com/ipaymu/ipaymu-go-api
 ```
 
 Then, import it using:
 
 ```go
 import (
-    "github.com/ipaymu/ipaymu-go"
+    "github.com/ipaymu/ipaymu-go-api"
 )
 ```
 

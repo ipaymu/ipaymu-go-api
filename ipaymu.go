@@ -35,6 +35,11 @@ func NewClient() *Client {
 	}
 }
 
+// AssignCredential sets the API key, virtual account, and environment for the iPaymu client.
+//
+// apiKey: The API key provided by iPaymu. This is required for authentication and authorization.
+// virtualAccount: The virtual account number associated with the API key. This is used to identify the merchant account.
+// env: The environment type (Production or Sandbox) to which the client will connect.
 func (c *Client) AssignCredential(apiKey, virtualAccount string, env EnvironmentType) {
 	c.ApiKey = apiKey
 	c.VirtualAccount = virtualAccount
@@ -43,6 +48,14 @@ func (c *Client) AssignCredential(apiKey, virtualAccount string, env Environment
 
 var defHTTPTimeout = 30 * time.Second
 
+// CallApi sends a POST request to the specified URL with the provided signature and body.
+// It constructs an HTTP request with the necessary headers and makes a request to the iPaymu API.
+//
+// url: The URL to which the request will be sent.
+// signature: The signature generated using the API key and other relevant data.
+// body: The request body in JSON format.
+//
+// The function returns a byte slice containing the response body and an error if any occurred during the request.
 func (c *Client) CallApi(url *url.URL, signature string, body []byte) ([]byte, error) {
 	reqBody := io.NopCloser(strings.NewReader(string(body)))
 
