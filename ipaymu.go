@@ -29,7 +29,7 @@ type Client struct {
 	EnvApi         EnvironmentType
 }
 
-func NewClient() *Client {
+func NewClient() ClientApi {
 	return &Client{
 		EnvApi: Production,
 	}
